@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Groupie Tracker - Details</title>
+    <link rel="icon" type="image/png" href="static/Images/iconb0.png">
+    <link rel="stylesheet" href="static/style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- <header>
+       
+        <img class="Image" src="{{ .Image }}" alt="Image">
+    </header> -->
+
+    <div class="container">
+        <div class="container">
+
+            <div class="calendar light">
+                <div class="leftCard">
+                    <div class="calendar_header">
+
+                        <div class="ImagedivPlayer">
+                            <img class="Image" src="{{ .Image }}" alt="Image">
+                        </div>
+
+
+
+                        <h1 class="header_title">{{.Name}}</h1>
+
+
+                    </div>
+                    <div class="calendar_plan">
+                        <div class="cl_plan">
+                            <div class="cl_copy"> Creation Date: {{.CreationDate}}
+                            </div>
+                            <br>
+                            <div class="cl_title">First Album: {{.FirstAlbum}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="members_card">
+                        <p class="ce_title">Members:</p>
+                    
+                        <div class="members">
+                            <ul>
+                                {{range $key, $value := .Members}}
+                                <li>
+                                    <div class="ei_Dot"></div>
+                                    <div class="ei_Title">
+                                        <span>🌟 {{$value}}</span>
+                                    </div>
+                                </li>
+                                {{end}}
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="calendar_events">
+                    <p class="ce_title">Concerts</p>
+                    <div class="event_item">
+                        {{range $loc, $Dates := .DatesLocations}}
+                        <ui>
+                            <li>
+                                <div class="ei_Dot"></div>
+                                <div class="ei_Title">
+                                    <i>📍</i> {{$loc}}:
+                                    {{range $date := $Dates}}
+                                    <div class="ei_Copy">
+                                        <i>📅</i> {{ $date }}
+                                    </div>
+
+                                    {{end}}
+                                </div>
+                                {{end}}
+                            </li>
+                        </ui>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

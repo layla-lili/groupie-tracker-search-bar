@@ -17,8 +17,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Galindo&family=Lakki+Reddy&family=Major+Mono+Display&family=Modak&family=Moirai+One&family=Nosifer&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Rubik+Dirt&family=Rubik+Marker+Hatch&family=Rubik+Microbe&family=Rubik+Pixels&family=Trade+Winds&family=Wavefont:wght@100&display=swap');
 
 header {
-  background-image: linear-gradient(to bott
-  om, rgba(48,50,43,0), rgb(48, 50, 43,7)), url('Images/headerBG.jpg');
+  background-image: linear-gradient(to bottom, rgba(48,50,43,0), rgb(48, 50, 43,7)), url('Images/headerBG.jpg');
   background-size: cover;
   background-position: center;
   height: 400px; /* Adjust the height as needed */
@@ -30,7 +29,12 @@ header {
   justify-content: center;
   align-items: center;
   font-size: 30px;
-
+  /* search new css */
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 
@@ -481,3 +485,5 @@ body{
   color:--light_grey;
   margin-left: 10px;
 }
+/* Revert */
+

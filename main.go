@@ -178,6 +178,40 @@ go func() {
 			}
 	})
 
+	// http.HandleFunc("/search", Handlers.SearchHandler)
+	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
+		if fetched{
+			for i := range artists {
+	
+				tmpl := Handlers.FullData{
+					ID:      artists[i].ID,
+					Image:   artists[i].Image,
+					Name:    artists[i].Name,
+					Members: make(map[string]string),
+		
+					CreationDate:   artists[i].CreationDate,
+					FirstAlbum:     artists[i].FirstAlbum,
+					Locations:      locations.Index[i].Locations,
+					Dates:          dates.Index[i].Dates,
+					DatesLocations: Relation.Index[i].DatesLocations,
+				}
+				for _, member := range artists[i].Members {
+					// Set the member name as both the key and value in the map
+					tmpl.Members[member] = member
+				}
+		
+				if tmpl.Image == "https://groupietrackers.herokuapp.com/api/images/mamonasassassinas.jpeg" {
+					tmpl.Image = "static/Images/ops.jpg"
+				}
+				ArtistsFull = append(ArtistsFull, tmpl)
+			}
+			
+		Handlers.SearchHandler(w, r, ArtistsFull)
+		}else{
+			Handlers.InternalServerErrorHandler(w,r)
+		}
+})
+
 	http.HandleFunc("/404", Handlers.NotFoundHandler)
 	http.HandleFunc("/400", Handlers.BadRequestHandler)
 	http.HandleFunc("/405", Handlers.MethodNotAllowedHandler)

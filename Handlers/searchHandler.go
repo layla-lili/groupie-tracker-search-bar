@@ -1,6 +1,7 @@
 package Handlers
 
 import (
+	"errors"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -8,28 +9,36 @@ import (
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
-	templates, err = template.ParseFiles(
-		"templates/search.html")
+	if r.URL.Path == "/search" {
+		templates, err := template.ParseFiles("templates/search.html")
 		if err != nil {
-			InternalServerErrorHandler(w,r)
+			InternalServerErrorHandler(w, r)
+			return
+		}
+		allArtists := artists
+
+		if r.Method != http.MethodGet {
+			MethodNotAllowedHandler(w, r)
 			return
 		}
 		
-	if r.Method != http.MethodGet {
-		MethodNotAllowedHandler(w,r)
+		text := r.URL.Query().Get("text")
+		result, findErr := FindData(strings.TrimSpace(text), allArtists)
+		
+		if findErr != nil {
+			BadRequestHandler(w, r)
+			return
+		}
+
+		err = templates.ExecuteTemplate(w, "search.html", result )
+		
+		if err != nil {
+			InternalServerErrorHandler(w, r)
+		}
+	} else {
+		NotFoundHandler(w, r)
 		return
 	}
-	text := r.FormValue("text")
-	if len(text) == 0 {
-		BadRequestHandler(w,r)
-		return
-	}
-	result, err := FindData(strings.TrimSpace(text), artists)
-	if err != nil {
-		BadRequestHandler(w,r)
-		return
-	}
-	HomePageHandler(w,r, result)
 }
 
 func FindData(text string, allData []FullData) ([]FullData, error) {
@@ -69,8 +78,7 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 		}
 	}
 	if result == nil {
-		// myError := errors.New(http.StatusBadRequest)
-		myError:=err
+		myError := errors.New("BadRequest")
 		return nil, myError
 	}
 	

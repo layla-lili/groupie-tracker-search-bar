@@ -44,3 +44,10 @@ type RelationsData struct {
 		DatesLocations map[string][]string `json:"datesLocations"`
 	} `json:"index"`
 }
+
+type Result struct {
+	Singer   Artists
+	Relation Locations
+	Text     string
+	Type     string
+}

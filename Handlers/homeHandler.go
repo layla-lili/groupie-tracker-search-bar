@@ -1,6 +1,7 @@
 package Handlers
 
 import (
+	
 	"html/template"
 	"net/http"
 )
@@ -15,6 +16,7 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request, artists []FullData)
 if r.URL.Path == "/" {
 
 err := templates.ExecuteTemplate(w, "index.html", artists)
+
 if err != nil {
 	InternalServerErrorHandler(w,r)
 }

@@ -16,8 +16,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Galindo&family=Lakki+Reddy&family=Major+Mono+Display&family=Modak&family=Moirai+One&family=Nosifer&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Rubik+Dirt&family=Rubik+Microbe&family=Rubik+Pixels&family=Trade+Winds&family=Wavefont:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Galindo&family=Lakki+Reddy&family=Major+Mono+Display&family=Modak&family=Moirai+One&family=Nosifer&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Rubik+Dirt&family=Rubik+Marker+Hatch&family=Rubik+Microbe&family=Rubik+Pixels&family=Trade+Winds&family=Wavefont:wght@100&display=swap');
 
+
 header {
-  background-image: linear-gradient(to bottom, rgba(48,50,43,0), rgb(48, 50, 43,7)), url('Images/headerBG.jpg');
+  background-image: linear-gradient(to bottom, rgba(48,50,43,0), rgba(48, 50, 43,7)), url('Images/headerBG.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 400px; /* Adjust the height as needed */
@@ -36,8 +38,6 @@ header {
   justify-content: flex-end;
   flex-direction: column;
 }
-
-
  .card {
     background-image: url('Images/cardBG0.png');
     width: 300px;
@@ -293,6 +293,7 @@ header {
 
 body{
   background-color: #30322B;
+  margin:0;
 }
 
 .container{
@@ -478,12 +479,67 @@ body{
   cursor: pointer;
    display: flex;
    flex-direction: column;
-
-
 }
 .members_card{
   color:--light_grey;
   margin-left: 10px;
 }
 /* Revert */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
 
+.SearchInput {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  padding: 18px 16px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+
+}
+
+.SearchInput::placeholder {
+  color: transparent;
+}
+
+.SearchInput:focus::placeholder {
+  color: rgb(131, 128, 128);
+}
+
+.SearchInput:focus,.SearchInput:not(:placeholder-shown) {
+  background-color: #fff;
+  border: 1px solid rgb(214, 164, 171);
+  width: 290px;
+  cursor: none;
+  padding: 18px 16px 18px 45px;
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+  height: 45px;
+  width: 45px;
+  background-color: #fff;
+  border-radius: 99px;
+  z-index: -1;
+  fill: rgb(214, 164, 171);;
+  border: 1px solid rgb(214, 164, 171);
+}
+
+.SearchInput:focus + .icon,.SearchInput:not(:placeholder-shown) + .icon {
+  z-index: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.topleft{
+  margin-left: -1%;
+  margin-bottom: 1%;
+}

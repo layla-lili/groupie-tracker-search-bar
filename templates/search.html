@@ -42,7 +42,7 @@
   <title>Document</title>
 </head>
 <body>
-  <section>
+  <!-- <section>
     <form class="search" action="/search" method="get">
       <input class="textintput" type="text" name="text" list="artist" placeholder="Type to search.." />
       <input type="submit" value="Submit" class="button" />
@@ -60,21 +60,23 @@
         </option>
         <option value="{{.FirstAlbum}}">{{.FirstAlbum}} -FirstAlbum</option>
         {{end}}
-       </datalist>
-  
+      </datalist>
     </form>
-  </section> 
+  </section>  -->
   <hr class="hr-line">
-  
-  <section class="container">
+    <section class="container">
+  {{ $displayed := "" }}
   {{range .}}
+      {{ if ne $displayed .Name }}
       <div class="card">
         <h2 class="label">{{.Name}}</h2>
         <a href="/details?id={{.ID}}">
           <img src="{{.Image}}" class="cardimg" alt="{{.Name}}" />
         </a>
       </div>
-      {{end}}
+      {{ $displayed = .Name }}
+      {{ end }}
+  {{end}}
   </section>
 </body>
 </html>

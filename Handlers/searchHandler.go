@@ -15,23 +15,17 @@ func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 			InternalServerErrorHandler(w, r)
 			return
 		}
-		allArtists := artists
-
 		if r.Method != http.MethodGet {
 			MethodNotAllowedHandler(w, r)
 			return
 		}
-		
 		text := r.URL.Query().Get("text")
-		result, findErr := FindData(strings.TrimSpace(text), allArtists)
-		
+		result, findErr := FindData(strings.TrimSpace(text), artists)
 		if findErr != nil {
 			BadRequestHandler(w, r)
 			return
 		}
-
 		err = templates.ExecuteTemplate(w, "search.html", result )
-		
 		if err != nil {
 			InternalServerErrorHandler(w, r)
 		}
@@ -43,7 +37,6 @@ func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 
 func FindData(text string, allData []FullData) ([]FullData, error) {
 	var result []FullData
-
 	text = strings.ToLower(text)
 	for _, v := range allData {
 		if strings.Contains(strings.ToLower(v.Name), text) {
@@ -81,7 +74,6 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 		myError := errors.New("BadRequest")
 		return nil, myError
 	}
-	
 	return result, nil
 }
 

@@ -21,11 +21,13 @@ func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 		}
 		text := r.URL.Query().Get("text")
 		result, findErr := FindData(strings.TrimSpace(text), artists)
+	
 		if findErr != nil {
 			BadRequestHandler(w, r)
 			return
 		}
 		err = templates.ExecuteTemplate(w, "search.html", result )
+		
 		if err != nil {
 			InternalServerErrorHandler(w, r)
 		}
@@ -40,8 +42,10 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 	text = strings.ToLower(text)
 	for _, v := range allData {
 		if strings.Contains(strings.ToLower(v.Name), text) {
+			if Check(v.ID, result) {
 			result = append(result, v)
 			continue
+			}
 		}
 		if strings.Contains(v.FirstAlbum, text) {
 			if Check(v.ID, result) {

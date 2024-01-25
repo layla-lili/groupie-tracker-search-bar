@@ -21,7 +21,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 		}
 		text := r.URL.Query().Get("text")
 		result, findErr := FindData(strings.TrimSpace(text), artists)
-	
+	    
 		if findErr != nil {
 			BadRequestHandler(w, r)
 			return

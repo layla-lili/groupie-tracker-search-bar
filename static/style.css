@@ -121,19 +121,16 @@ header {
 }
 
 
-
-
-
 @import 'https://fonts.googleapis.com/css?family=Reem+Kufi';
-
-
-
 
 @keyframes wave {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+.music-card.hidden {
+  display: none;
+}
 .music-card {
   margin: 27px;
   /* background: #fff; */
@@ -146,7 +143,21 @@ header {
   border-radius: 6px;
   display:  flex;
   justify-content: center;
+  transition: 0.5s;
 }
+.music-card:hover {
+  transform: translateY(-20px);
+  cursor: pointer;
+  box-shadow: 0px 0px 20px 1px #ffbb763f;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+  scale: 1.2;
+  opacity: 0.7;
+}
+
+.music-card:hover {
+  box-shadow: 0 0 30px 1000px black, inset 5px 5px 5px 0px rgb(31, 31, 31);
+}
+
 
 
 .image {

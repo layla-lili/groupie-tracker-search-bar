@@ -14,8 +14,6 @@
 <body>
 
 <header>
-
-   <!-- </div> -->
    <div class="topleft">
     <div class="input-container">
       <form action="/search" method="GET" >
@@ -39,31 +37,16 @@
     </form>
   </div>
   </div>
-  <h1 class="title glow-effect">GROUPIE-TRACKER</h1>
- 
-    </header>
-    <!-- <div class="topnav">
-        <div class="search-container">
-          <form action="/action_page.php" method="">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-      </div> -->
-
-      
+  <h1 class="title glow-effect">GROUPIE-TRACKER</h1> 
+</header>
     <div class="container">
         {{range .}}
         <a class="music-card " href="/details?id={{.ID}}">
-
-      
-            <!-- <div class='image'></div> -->
             <div class="ImagedivPlayer">
                 <img class="Image" src="{{ .Image }}" alt="Image">
             </div>         
             <div class='info'>
               <h2 class='artist'>{{.Name}}</h2>
-              <!-- <div class='title'>Lecrae</div> -->
               <div class="creation-date"><strong>Creation Date:</strong> {{.CreationDate}}</div>
               <div class="first-album"><strong>First Album:</strong> {{.FirstAlbum}}</div>
               <form class= "cardEnd" action="/details" method="GET">
@@ -71,17 +54,10 @@
                 <input class="more" type="submit" value="More...">
             </form>
             </div>
-           
-           
-            <!-- <input class="more" name="more_info" id="more_info" type="submit" value="More.. :("> -->
-           
-            <!-- <i class="fa fa-pause trigger" aria-hidden="true"></i> -->
-            <!-- <i class="fa fa-play trigger" aria-hidden="true"></i> -->
-       
         </a>
           {{end}}
           </div>
-    <script>
+    <!-- <script>
       $(document).ready(function() {
   $('#searchInput').on('input', function() {
     var searchItem = $(this).val().toLowerCase();
@@ -96,6 +72,6 @@
     });
   });
 });
-    </script>
+    </script> -->
 </body>
 </html>

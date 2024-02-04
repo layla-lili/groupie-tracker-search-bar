@@ -6,7 +6,6 @@ import (
 	"strconv"
 )
 
-
 func DetailspageHandler(w http.ResponseWriter, r *http.Request, artists []FullData){
 	templates, err = template.ParseFiles(
 		"templates/details.html")
@@ -26,24 +25,17 @@ func DetailspageHandler(w http.ResponseWriter, r *http.Request, artists []FullDa
 	}
 	if err != nil {
 		// If no artist is found, return a 404 Not Found response
-		// http.NotFound(w, r)
 		NotFoundHandler(w,r)
 		return
 	}
-	
 
 	// Fetch the artist details using the selected ID
 	artist := getArtistDetails(id, artists)
 	// Render the details.html template with the artist data
-	// tmpl := template.Must(template.ParseFiles("templates/details.html"))
-	// tmpl.Execute(w, artist)
-
-error := templates.ExecuteTemplate(w, "details.html", artist)
-if error != nil {
-	InternalServerErrorHandler(w,r)
-}
-
-
+	error := templates.ExecuteTemplate(w, "details.html", artist)
+	if error != nil {
+		InternalServerErrorHandler(w,r)
+	}
 }
 
 // Function to fetch artist details based on the ID
@@ -54,7 +46,6 @@ func getArtistDetails(id int, artists []FullData) FullData {
 			return a
 		}
 	}
-
 	// If no artist is found, return an empty FullData struct
 	return FullData{}
 }

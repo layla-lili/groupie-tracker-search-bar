@@ -1,69 +1,18 @@
-<!-- {{ define "content"}} -->
-<!-- <section>
-  <form class="search" action="/search" method="get">
-    <input class="textintput" type="text" name="text" list="artist" placeholder="Type to search.." />
-    <input type="submit" value="Submit" class="button" />
-    <datalist id="artist">
-      {{range .}}
-      <option value="{{.Name}}">{{.Name}} -artist/band name</option>
-      {{range .Members}}
-      <option value="{{.}}">{{.}} -member</option>
-      {{end}} {{range $key, $value := .DatesLocations}}
-      <option value="{{$key}}">{{$key}} -location</option>
-      <option value="{{$value}}">{{$value}} -Concert Date</option>
-      {{end}}
-      <option value="{{.CreationDate}}">
-        {{.CreationDate}} -creationdate
-      </option>
-      <option value="{{.FirstAlbum}}">{{.FirstAlbum}} -FirstAlbum</option>
-      {{end}}
-     </datalist>
-
-  </form>
-</section> -->
-<!-- <hr class="hr-line">
-
-<section class="container">
-{{range .}}
-    <div class="card">
-      <h2 class="label">{{.Name}}</h2>
-      <a href="/details?id={{.ID}}">
-        <img src="{{.Image}}" class="cardimg" alt="{{.Name}}" />
-      </a>
-    </div>
-    {{end}}
-</section>
-{{end}} -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Search</title>
+  <link rel="stylesheet" href="static/style.css">
+
 </head>
+
+<header>
+  <a   href="/"><h1 class="title glow-effect">GROUPIE-TRACKER</h1></a>
+</header>
+
 <body>
-  <!-- <section>
-    <form class="search" action="/search" method="get">
-      <input class="textintput" type="text" name="text" list="artist" placeholder="Type to search.." />
-      <input type="submit" value="Submit" class="button" />
-      <datalist id="artist">
-        {{range .}}
-        <option value="{{.Name}}">{{.Name}} -artist/band name</option>
-        {{range .Members}}
-        <option value="{{.}}">{{.}} -member</option>
-        {{end}} {{range $key, $value := .DatesLocations}}
-        <option value="{{$key}}">{{$key}} -location</option>
-        <option value="{{$value}}">{{$value}} -Concert Date</option>
-        {{end}}
-        <option value="{{.CreationDate}}">
-          {{.CreationDate}} -creationdate
-        </option>
-        <option value="{{.FirstAlbum}}">{{.FirstAlbum}} -FirstAlbum</option>
-        {{end}}
-      </datalist>
-    </form>
-  </section>  -->
-  <hr class="hr-line">
     <section class="container">
   {{ $displayed := "" }}
   {{range .}}

@@ -4,8 +4,10 @@ import (
 	"html/template"
 	"net/http"
 )
+
 var templates *template.Template
 var err error
+
 func BadRequestHandler(w http.ResponseWriter, r *http.Request) {
 	templates, err = template.ParseFiles(
 		"templates/400.html")
@@ -20,6 +22,7 @@ func BadRequestHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	templates, err = template.ParseFiles(
 		"templates/404.html")
@@ -34,6 +37,7 @@ func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
 func MethodNotAllowedHandler(w http.ResponseWriter, r *http.Request) {
 	templates, err = template.ParseFiles(
 		"templates/405.html")
@@ -47,6 +51,7 @@ func MethodNotAllowedHandler(w http.ResponseWriter, r *http.Request) {
 		InternalServerErrorHandler(w, r)
 	}
 }
+
 func InternalServerErrorHandler(w http.ResponseWriter, r *http.Request) {
 	templates, err = template.ParseFiles(
 		"templates/500.html")

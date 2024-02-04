@@ -13,16 +13,14 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request, artists []FullData)
 			InternalServerErrorHandler(w,r)
 			return
 		}
-if r.URL.Path == "/" {
-
-err := templates.ExecuteTemplate(w, "index.html", artists)
-
-if err != nil {
-	InternalServerErrorHandler(w,r)
-}
-}else{
-	NotFoundHandler(w,r)
-	return
-}
-	// fmt.Printf("Data: %+v\n", ArtistsFull)
+	if r.URL.Path == "/" {
+		err := templates.ExecuteTemplate(w, "index.html", artists)
+		if err != nil {
+			InternalServerErrorHandler(w,r)
+		}
+	}else{
+		NotFoundHandler(w,r)
+		return
+	}
+		// fmt.Printf("Data: %+v\n", ArtistsFull)
 }

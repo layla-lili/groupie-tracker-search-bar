@@ -21,13 +21,13 @@ func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 		}
 		text := r.URL.Query().Get("text")
 		result, findErr := FindData(strings.TrimSpace(text), artists)
-	    
+
 		if findErr != nil {
 			BadRequestHandler(w, r)
 			return
 		}
-		err = templates.ExecuteTemplate(w, "search.html", result )
-		
+		err = templates.ExecuteTemplate(w, "search.html", result)
+
 		if err != nil {
 			InternalServerErrorHandler(w, r)
 		}
@@ -43,8 +43,8 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 	for _, v := range allData {
 		if strings.Contains(strings.ToLower(v.Name), text) {
 			if Check(v.ID, result) {
-			result = append(result, v)
-			continue
+				result = append(result, v)
+				continue
 			}
 		}
 		if strings.Contains(v.FirstAlbum, text) {
@@ -60,19 +60,39 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 			}
 		}
 		for _, member := range v.Members {
+
 			if strings.Contains(strings.ToLower(member), text) {
 				if Check(v.ID, result) {
 					result = append(result, v)
 				}
 			}
 		}
-		for key := range v.DatesLocations {
-			if strings.Contains(strings.ToLower(key), text) {
+		for _, date := range v.Dates {
+			if strings.Contains(strings.ToLower(date), text) {
 				if Check(v.ID, result) {
 					result = append(result, v)
 				}
 			}
 		}
+		for _, location := range v.Locations {
+			if strings.Contains(strings.ToLower(location), text) {
+				if Check(v.ID, result) {
+					result = append(result, v)
+				}
+			}
+		}
+		for key := range v.DatesLocations {
+			concertDates := strings.Join(v.DatesLocations[key], " ")
+			for range key {
+				if strings.Contains(strings.ToLower(concertDates), string(text)) {
+					if Check(v.ID, result) {
+						result = append(result, v)
+					}
+				}
+			}
+
+		}
+
 	}
 	if result == nil {
 		myError := errors.New("BadRequest")

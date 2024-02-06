@@ -32,8 +32,8 @@
         <optgroup label="Locations">
             {{range $loc, $Dates := .DatesLocations}}
             <optgroup label="Location: {{$loc}}">
+              <option value="{{$loc}}">{{$loc}} - Location</option>
                 {{range $date := $Dates}}
-                <option disabled>Concerts:</option>
                 <option value="{{$date}}">{{$date}} - Concert Date</option>
                 {{end}}
             </optgroup>

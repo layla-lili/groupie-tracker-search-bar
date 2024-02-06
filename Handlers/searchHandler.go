@@ -6,7 +6,18 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sort"
+
 )
+// Define a custom sorter type
+type ByName []FullData
+
+// Implement the sort.Interface methods for ByName type
+func (a ByName) Len() int           { return len(a) }
+func (a ByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByName) Less(i, j int) bool { return strings.Compare(a[i].Name, a[j].Name) < 0 }
+
+
 
 func SearchHandler(w http.ResponseWriter, r *http.Request, artists []FullData) {
 	if r.URL.Path == "/search" {
@@ -94,6 +105,9 @@ func FindData(text string, allData []FullData) ([]FullData, error) {
 		}
 
 	}
+	// Sort the result slice by name
+	sort.Sort(ByName(result))
+
 	if result == nil {
 		myError := errors.New("BadRequest")
 		return nil, myError
